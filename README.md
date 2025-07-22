@@ -1,24 +1,29 @@
-# 📚 MyBooks Backend - Sistema de Gestión de Biblioteca
+# 📚 MyBooks Backend - Sistema de Gestión de Biblioteca Personal
 
-API REST para gestión de libros desarrollada con Spring Boot y H2 Database.
+API REST robusta para gestión de bibliotecas personales desarrollada con Spring Boot 3.5.3. Utiliza H2 Database para almacenamiento y está optimizada para deployment en Railway.
+
+## 🌟 Características
+
+- ✅ **CRUD completo de libros** - Gestión completa de biblioteca personal
+- ✅ **Gestión de autores** - Crear y mantener catálogo de autores
+- ✅ **Gestión de editoriales** - Administrar información de publishers
+- ✅ **Sistema de categorías** - Clasificación por géneros literarios
+- ✅ **Estados de lectura** - Seguimiento de libros leídos/por leer
+- ✅ **API REST documentada** - Swagger/OpenAPI 3 integrado
+- ✅ **Base de datos H2** - Archivo local (desarrollo) / Memoria (producción)
+- ✅ **Deploy en Railway** - Configuración optimizada
+- ✅ **CORS configurado** - Listo para frontend web
 
 ## 🚀 Tecnologías
 
-- **Java 17**
-- **Spring Boot 3.5.3**
-- **Spring Data JPA**
-- **H2 Database** (En archivo para desarrollo, en memoria para producción)
-- **Swagger/OpenAPI 3** para documentación
-- **Lombok** para reducir boilerplate
-- **Maven** para gestión de dependencias
-
-## 📋 Funcionalidades
-
-- ✅ CRUD completo de libros
-- ✅ API REST con endpoints documentados
-- ✅ Interfaz Swagger UI integrada
-- ✅ Base de datos H2 con consola web (desarrollo)
-- ✅ Configuración para deploy en Railway
+- **Java 17** - Lenguaje de programación
+- **Spring Boot 3.5.3** - Framework principal
+- **Spring Data JPA** - ORM para base de datos
+- **H2 Database** - Base de datos embebida
+- **Swagger/OpenAPI 3** - Documentación automática de API
+- **Lombok** - Reducción de boilerplate code
+- **Maven** - Gestión de dependencias y build
+- **Railway** - Plataforma de deployment
 
 ## 🛠️ Configuración Local
 
@@ -28,16 +33,26 @@ API REST para gestión de libros desarrollada con Spring Boot y H2 Database.
 
 ### Instalación y Ejecución
 
-```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/MyBooks-Bend.git
-cd MyBooks-Bend
+1. **Clona el repositorio**:
+   ```bash
+   git clone https://github.com/EttorePW/MyBooks-Bend.git
+   cd MyBooks-Bend
+   ```
 
-# Compilar y ejecutar
-./mvnw spring-boot:run
-```
+2. **Ejecuta la aplicación**:
+   ```bash
+   # Usando Maven wrapper
+   ./mvnw spring-boot:run
+   
+   # O compilar y ejecutar JAR
+   ./mvnw clean package -DskipTests=true
+   java -jar target/MyBooks-0.0.1-SNAPSHOT.jar
+   ```
 
-La aplicación estará disponible en: `http://localhost:8080`
+3. **Verifica que funciona**:
+   - API: http://localhost:8080
+   - Swagger UI: http://localhost:8080/swagger-ui/index.html
+   - H2 Console: http://localhost:8080/h2-console
 
 ## 📖 API Endpoints
 
@@ -48,12 +63,11 @@ La aplicación estará disponible en: `http://localhost:8080`
 ### Base de Datos (Desarrollo)
 - **H2 Console**: `http://localhost:8080/h2-console`
 - **JDBC URL**: `jdbc:h2:file:./data/MyBooksDB`
-- **Usuario**: `EttoreJunior`
-- **Contraseña**: `DiosEsFiel1`
 
 ### Endpoints Principales
 
-```
+#### Libros
+```http
 GET    /api/books          # Obtener todos los libros
 GET    /api/books/{id}     # Obtener libro por ID
 POST   /api/books          # Crear nuevo libro
@@ -61,135 +75,174 @@ PUT    /api/books/{id}     # Actualizar libro
 DELETE /api/books/{id}     # Eliminar libro
 ```
 
-## 🚀 Deploy en Railway
+#### Autores
+```http
+GET    /api/authors          # Obtener todos los autores
+POST   /api/authors          # Crear nuevo autor
+```
+
+#### Editoriales
+```http
+GET    /api/publishers          # Obtener todas las editoriales
+POST   /api/publishers          # Crear nueva editorial
+```
+
+## 🚀 Deployment en Railway
 
 ### Configuración Automática
-El proyecto incluye:
-- `nixpacks.toml` - Configuración de build para Railway
-- `Procfile` - Comando de inicio
-- `application-railway.properties` - Configuración para producción
+El proyecto incluye configuración optimizada para Railway:
+- **`nixpacks.toml`** - Configuración de build con Java 17
+- **`Procfile`** - Comando de inicio alternativo
+- **`application-railway.properties`** - Configuración para producción
 
-### Pasos para Deploy
-
-1. **Push al repositorio**:
-   ```bash
-   git add .
-   git commit -m "Configure Railway deployment"
-   git push origin main
-   ```
-
-2. **Crear proyecto en Railway**:
-   - Ve a [railway.app](https://railway.app)
-   - Conecta tu repositorio GitHub
-   - Railway detectará automáticamente la configuración Java
-
-3. **Variables de Entorno** (Opcional):
+### Deployment
+1. **Conecta tu repositorio** en Railway
+2. **Variables de entorno** (opcionales, para mayor seguridad):
    ```
    SPRING_PROFILES_ACTIVE=railway
-   H2_CONSOLE_ENABLED=false
    ```
+3. **Deploy automático** - Railway detecta cambios en main branch
 
-4. **URLs después del deploy**:
-   - API Base: `https://tu-proyecto.railway.app`
-   - Swagger UI: `https://tu-proyecto.railway.app/swagger-ui/index.html`
-
-### Diferencias Producción vs Desarrollo
-
-| Aspecto | Desarrollo | Railway (Producción) |
-|---------|------------|----------------------|
-| Base de datos | Archivo local H2 | H2 en memoria |
-| Puerto | 8080 | Variable $PORT |
-| H2 Console | Habilitada | Deshabilitada |
-| Logs SQL | Habilitados | Deshabilitados |
-
-## 🔧 Configuración Avanzada
-
-### Variables de Entorno Soportadas
-
-- `PORT`: Puerto del servidor (Railway lo configura automáticamente)
-- `DATABASE_URL`: URL de conexión a la base de datos
-- `DB_USERNAME`: Usuario de la base de datos
-- `DB_PASSWORD`: Contraseña de la base de datos
-- `H2_CONSOLE_ENABLED`: Habilitar/deshabilitar consola H2
-- `SPRING_PROFILES_ACTIVE`: Perfil activo de Spring
-
-### Perfiles de Spring
-
-- **default**: Configuración local con H2 en archivo
-- **railway**: Configuración para Railway con H2 en memoria
+### URLs de Producción
+- **API Base**: `https://tu-mybooks.railway.app`
+- **Swagger UI**: `https://tu-mybooks.railway.app/swagger-ui/index.html`
 
 ## 🧪 Testing
 
+### Ejecutar Tests
 ```bash
-# Ejecutar todos los tests
 ./mvnw test
 
-# Compilar sin tests
-./mvnw clean package -DskipTests=true
+# Tests específicos
+./mvnw test -Dtest=BookControllerTest
 
-# Ejecutar con perfil específico
-./mvnw spring-boot:run -Dspring-boot.run.profiles=railway
+# Con coverage
+./mvnw test jacoco:report
 ```
 
-## 📁 Estructura del Proyecto
+### Testing Manual
+```bash
+# Health check
+curl https://tu-mybooks.railway.app/actuator/health
 
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── buchverwaltungssoftware/
-│   │       └── mybooks/
-│   │           ├── MyBooksApplication.java
-│   │           └── books/
-│   │               ├── Book.java              # Entidad
-│   │               ├── BookController.java    # REST Controller
-│   │               ├── BookService.java       # Lógica de negocio
-│   │               ├── BookRepository.java    # Repositorio JPA
-│   │               └── dtos/
-│   │                   ├── BookDTO.java       # DTO de respuesta
-│   │                   └── NewBookDTO.java    # DTO de creación
-│   └── resources/
-│       ├── application.properties             # Configuración base
-│       └── application-railway.properties     # Configuración Railway
-└── test/
-    └── java/
-        └── buchverwaltungssoftware/
-            └── mybooks/
-                └── MyBooksApplicationTests.java
+# Obtener libros
+curl https://tu-mybooks.railway.app/api/books
+
+# Crear libro
+curl -X POST https://tu-mybooks.railway.app/api/books \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Mi Libro","author":"Autor","publisher":"Editorial","description":"Descripción","category":"Categoría","place":"Estante A","hasFinished":false}'
 ```
 
-## 🐛 Troubleshooting
+### Variables de Entorno
+| Variable | Descripción | Default | Requerido |
+|----------|-------------|---------|-----------|
+| `PORT` | Puerto del servidor | 8080 | ❌ (Railway lo asigna) |
+| `DATABASE_URL` | Connection URL | jdbc:h2:mem:mybooksdb | ❌ |
+| `H2_CONSOLE_ENABLED` | Habilitar consola H2 | false | ❌ |
+| `SPRING_PROFILES_ACTIVE` | Perfil activo de Spring | railway | ❌ |
 
-### Problemas Comunes
+### Configuración Avanzada
+```properties
+# application-railway.properties
+server.port=${PORT}
+spring.datasource.url=jdbc:h2:mem:mybooksdb
+spring.h2.console.enabled=${H2_CONSOLE_ENABLED:false}
+```
 
-1. **Error de puerto en Railway**:
-   - Verificar que `server.port=${PORT:8080}` esté en application.properties
+## 🤝 Contribuciones
 
-2. **Base de datos no persiste en Railway**:
-   - Normal: Railway usa almacenamiento efímero. Los datos se recrean en cada deploy.
-   - Para persistencia real, considerar migrar a PostgreSQL.
+1. Fork el proyecto  
+2. Crea una rama feature (`git checkout -b feature/AmazingFeature`)  
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)  
+4. Push a la rama (`git push origin feature/AmazingFeature`)  
+5. Abre un Pull Request
 
-3. **Error de build**:
-   - Verificar versión de Java 17
-   - Limpiar cache: `./mvnw clean`
+### Guías de Contribución
+- Seguir convenciones de Spring Boot  
+- Añadir tests para nuevas funcionalidades  
+- Documentar cambios en la API  
+- Mantener compatibilidad con versiones anteriores
 
-4. **H2 Console no funciona**:
-   - En desarrollo: verificar que `spring.h2.console.enabled=true`
-   - En Railway: está deshabilitada por seguridad
+## ⚙️ Estructura del Proyecto
+
+```
+MyBooks-Bend/
+├── .mvn/                          # Maven wrapper config
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── buchverwaltungssoftware/mybooks/
+│   │   │       ├── MyBooksApplication.java    # Clase principal
+│   │   │       ├── config/                    # Configuraciones
+│   │   │       ├── controller/                # REST Controllers
+│   │   │       ├── model/                     # Entidades JPA
+│   │   │       ├── repository/                # Repositorios
+│   │   │       ├── service/                   # Lógica de negocio
+│   │   │       └── dtos/                      # Data Transfer Objects
+│   │   └── resources/
+│   │       ├── application.properties         # Configuración principal
+│   │       └── application-railway.properties # Configuración Railway
+│   └── test/                                  # Tests unitarios
+├── target/                                    # Build artifacts
+├── nixpacks.toml                              # Configuración Railway
+├── Procfile                                   # Comando de inicio (backup)
+├── pom.xml                                    # Dependencias Maven
+└── README.md                                  # Documentación principal
+```
 
 ## 📝 Notas Importantes
 
 - ⚠️ **Datos en Railway**: Se pierden en cada redeploy (H2 en memoria)
 - 🔒 **Seguridad**: H2 Console deshabilitada en producción
-- 📊 **Escalabilidad**: Para producción real, migrar a PostgreSQL/MySQL
+- 📊 **Scalabilidad**: Para producción real, considerar migrar a PostgreSQL/MySQL
 - 🔧 **Logs**: Configurados para nivel INFO en producción
+
+## 📈 Mejoras Futuras
+
+- 🔐 **Autenticación JWT** - Sistema de usuarios y roles
+- 📊 **Métricas avanzadas** - Prometheus/Grafana integration
+- 🔄 **Cache Redis** - Para mejorar performance
+- 📋 **Paginación** - Para listas grandes de libros
+- 🔍 **Búsqueda full-text** - Consulta de texto completo en H2
+- 📧 **Notificaciones** - Email/SMS para nuevos lanzamientos
+- 🏗️ **Arquitectura hexagonal** - Mejor separación de capas
+- 🧪 **Test coverage 100%** - Tests exhaustivos
+- 📱 **WebSockets** - Updates en tiempo real
 
 ## 📄 Licencia
 
-Este proyecto es de código abierto bajo la licencia MIT.
+Este proyecto está bajo la Licencia MIT - ver [LICENSE](LICENSE) para detalles.
+
+## ✨ Agradecimientos
+
+- **Spring Team** - Por el excelente framework  
+- **H2 Database** - Por una base de datos embebida potente  
+- **Railway** - Por la plataforma de deployment sencilla  
+- **OpenAPI** - Por la documentación automática  
+- **Comunidad Open Source** - Por inspiración y recursos
+
+## 👨‍💻 Autor
+
+**EttoreJunior**
+- GitHub: [@EttorePW](https://github.com/EttorePW)
+- Frontend: [MyBooks-fend](https://github.com/EttorePW/MyBooks-fend)
 
 ---
 
-**Desarrollado por**: EttoreJunior  
+### 📊 Estado del Proyecto
+
+| Aspecto | Estado | Notas |
+|---------|--------|-------|
+| **Build** | ✅ Funcionando | Maven build exitoso |
+| **Tests** | ⚠️ Básicos | Necesita más cobertura |
+| **Deployment** | ✅ Railway | Auto-deploy configurado |
+| **API Docs** | ✅ Swagger | Documentación completa |
+| **Database** | ✅ H2 (Desarrollo/Producción) | Sin persistencia en producción |
+
+---
+
 **Versión**: 0.0.1-SNAPSHOT  
+**Última actualización**: Julio 2025  
+**Java**: 17  
 **Spring Boot**: 3.5.3
