@@ -2,6 +2,14 @@
 
 ## Cambios realizados para migrar de H2 a MongoDB
 
+### Docker configurado:
+- **Dockerfile**: Multi-stage build optimizado
+- **Build stage**: Usa Maven para compilar la aplicación
+- **Runtime stage**: Usa JRE 17 ligero para ejecutar la app
+- **Seguridad**: Usuario no-root para ejecutar la aplicación
+- **Optimización**: Memoria configurada para plan gratuito de Render
+- **Health check**: Integrado en el contenedor
+
 ### 1. Dependencias actualizadas en pom.xml:
 - Removida: `spring-boot-starter-data-jpa` y `h2`
 - Agregadas: `spring-boot-starter-data-mongodb` y `spring-boot-starter-actuator`
@@ -41,17 +49,19 @@ git push origin main
 4. Configura el servicio:
    - **Name**: `mybooks-api`
    - **Branch**: `main`
-   - **Runtime**: `Java`
-   - **Build Command**: `mvn clean package -DskipTests`
-   - **Start Command**: `java -jar target/MyBooks-0.0.1-SNAPSHOT.jar`
+   - **Runtime**: `Docker`
+   - Render detectará automáticamente el `Dockerfile`
+   - O usa la configuración en `render.yaml`
 
 ### 3. Variables de entorno:
 Agrega las siguientes variables de entorno en Render:
 ```
 MONGODB_URI=mongodb+srv://ettorepw:Diosesfiel1%2B@bibliotecadejunior.y2xvybm.mongodb.net/MyBookDB?retryWrites=true&w=majority&maxPoolSize=10&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&socketTimeoutMS=0
 MONGODB_DATABASE=MyBookDB
-PORT=10000
+JAVA_OPTS=-Xmx450m -Xms256m
 ```
+
+**Nota**: Render asigna automáticamente el puerto, no necesitas configurar PORT.
 
 ### 4. Configuración adicional:
 - **Health Check Path**: `/actuator/health`

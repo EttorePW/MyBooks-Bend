@@ -1,15 +1,13 @@
 services:
   - type: web
     name: mybooks-api
-    env: java
-    buildCommand: mvn clean package -DskipTests
-    startCommand: java -jar target/MyBooks-0.0.1-SNAPSHOT.jar
+    env: docker
     plan: free
     envVars:
       - key: MONGODB_URI
         value: mongodb+srv://ettorepw:Diosesfiel1%2B@bibliotecadejunior.y2xvybm.mongodb.net/MyBookDB?retryWrites=true&w=majority&maxPoolSize=10&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&socketTimeoutMS=0
       - key: MONGODB_DATABASE
         value: MyBookDB
-      - key: PORT
-        value: 10000
+      - key: JAVA_OPTS
+        value: -Xmx450m -Xms256m
     healthCheckPath: /actuator/health
