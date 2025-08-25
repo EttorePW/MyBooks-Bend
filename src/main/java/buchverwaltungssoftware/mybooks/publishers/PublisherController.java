@@ -20,7 +20,7 @@ public class PublisherController {
         return publisherService.getAll();
     }
     @GetMapping("/{id}")
-    public PublisherDTO getById(@PathVariable Long id) {
+    public PublisherDTO getById(@PathVariable String id) {
         return publisherService.getPublisherById(id);
     }
     @PostMapping
@@ -32,7 +32,7 @@ public class PublisherController {
         return publisherService.updatePublisher(newPublisherDTO);
     }
     @DeleteMapping("/{id}")
-    public void deletePublisherById(@PathVariable Long id) {
+    public void deletePublisherById(@PathVariable String id) {
         publisherService.deletePublisherById(id);
     }
 }

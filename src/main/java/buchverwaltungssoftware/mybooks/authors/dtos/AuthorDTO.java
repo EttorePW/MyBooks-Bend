@@ -2,25 +2,25 @@ package buchverwaltungssoftware.mybooks.authors.dtos;
 
 public class AuthorDTO {
 
-    private Long authorId;
+    private String authorId;
     private String authorFirstName;
     private String authorLastName;
 
     public AuthorDTO() {
     }
 
-    public AuthorDTO(Long authorId, String authorFirstName, String authorLastName) {
+    public AuthorDTO(String authorId, String authorFirstName, String authorLastName) {
         this.authorId = authorId;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
     }
 
     // Getters and Setters
-    public Long getAuthorId() {
+    public String getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(String authorId) {
         this.authorId = authorId;
     }
 

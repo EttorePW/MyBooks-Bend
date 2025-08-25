@@ -2,23 +2,23 @@ package buchverwaltungssoftware.mybooks.categories.dtos;
 
 public class CategoryDTO {
 
-    private Long categoryId;
+    private String categoryId;
     private String categoryName;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(Long categoryId, String categoryName) {
+    public CategoryDTO(String categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
     // Getters and Setters
-    public Long getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

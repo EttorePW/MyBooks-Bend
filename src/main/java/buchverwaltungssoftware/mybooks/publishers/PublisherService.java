@@ -33,7 +33,7 @@ public class PublisherService {
         return publishers;
     }
 
-    public PublisherDTO getPublisherById(Long id) {
+    public PublisherDTO getPublisherById(String id) {
         return convertPublisherToPublisherDTO(publisherRepository.findById(id).orElse(new Publisher()));
     }
 
@@ -42,7 +42,7 @@ public class PublisherService {
         publisherRepository.save(publisher);
         return convertPublisherToPublisherDTO(publisher);
     }
-    public void deletePublisherById(Long id) {
+    public void deletePublisherById(String id) {
         publisherRepository.deleteById(id);
     }
 

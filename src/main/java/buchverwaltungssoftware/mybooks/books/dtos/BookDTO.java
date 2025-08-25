@@ -1,7 +1,7 @@
 package buchverwaltungssoftware.mybooks.books.dtos;
 
 public class BookDTO {
-    private Long bookId;
+    private String bookId;
     private String title;
     private String description;
     private boolean hasFinished;
@@ -13,7 +13,7 @@ public class BookDTO {
     public BookDTO() {
     }
 
-    public BookDTO(Long bookId, String title, String description, boolean hasFinished, 
+    public BookDTO(String bookId, String title, String description, boolean hasFinished, 
                    String author, String publisher, String category, String place) {
         this.bookId = bookId;
         this.title = title;
@@ -26,11 +26,11 @@ public class BookDTO {
     }
 
     // Getters and Setters
-    public Long getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 

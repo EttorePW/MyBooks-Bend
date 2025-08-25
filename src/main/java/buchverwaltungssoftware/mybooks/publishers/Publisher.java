@@ -1,18 +1,15 @@
 package buchverwaltungssoftware.mybooks.publishers;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Entity
+@Document(collection = "publishers")
 public class Publisher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long publisherId;
+    private String publisherId;
     private String name;
     private String email;
     private Date createdDate = new Date();
@@ -27,11 +24,11 @@ public class Publisher {
     }
 
     // Getters and Setters
-    public Long getPublisherId() {
+    public String getPublisherId() {
         return publisherId;
     }
 
-    public void setPublisherId(Long publisherId) {
+    public void setPublisherId(String publisherId) {
         this.publisherId = publisherId;
     }
 

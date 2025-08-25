@@ -19,7 +19,7 @@ public class AuthorController {
         return authorService.getAllAuthors();
     }
     @GetMapping("/{authorId}")
-    public AuthorDTO getAuthorsById(@PathVariable Long authorId) {
+    public AuthorDTO getAuthorsById(@PathVariable String authorId) {
         return authorService.getAuthorById(authorId);
     }
     @PostMapping
@@ -31,7 +31,7 @@ public class AuthorController {
         return authorService.updateAuthor(newAuthorDTO);
     }
     @DeleteMapping("/{authorId}")
-    public void deleteAuthor(@PathVariable Long authorId) {
+    public void deleteAuthor(@PathVariable String authorId) {
         authorService.deleteAuthor(authorId);
     }
 }

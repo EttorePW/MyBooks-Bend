@@ -2,23 +2,23 @@ package buchverwaltungssoftware.mybooks.publishers.dtos;
 
 public class PublisherDTO {
 
-    private Long publisherId;
+    private String publisherId;
     private String name;
 
     public PublisherDTO() {
     }
 
-    public PublisherDTO(Long publisherId, String name) {
+    public PublisherDTO(String publisherId, String name) {
         this.publisherId = publisherId;
         this.name = name;
     }
 
     // Getters and Setters
-    public Long getPublisherId() {
+    public String getPublisherId() {
         return publisherId;
     }
 
-    public void setPublisherId(Long publisherId) {
+    public void setPublisherId(String publisherId) {
         this.publisherId = publisherId;
     }
 

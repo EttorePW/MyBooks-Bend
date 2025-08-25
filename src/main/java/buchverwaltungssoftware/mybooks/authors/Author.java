@@ -1,17 +1,14 @@
 package buchverwaltungssoftware.mybooks.authors;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Entity
+@Document(collection = "authors")
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long authorId;
+    private String authorId;
     private String authorFirstName;
     private String authorLastName;
     private int authorAge;
@@ -28,11 +25,11 @@ public class Author {
     }
 
     // Getters and Setters
-    public Long getAuthorId() {
+    public String getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(String authorId) {
         this.authorId = authorId;
     }
 

@@ -3,27 +3,25 @@ package buchverwaltungssoftware.mybooks.books;
 import buchverwaltungssoftware.mybooks.authors.Author;
 import buchverwaltungssoftware.mybooks.categories.Category;
 import buchverwaltungssoftware.mybooks.publishers.Publisher;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.Date;
 
-@Entity
+@Document(collection = "books")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long bookId;
+    private String bookId;
     private String title;
     private String description;
     private boolean hasFinished;
-    @ManyToOne
-    @JoinColumn(name = "author_id")
+    @DBRef
     private Author author;
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
+    @DBRef
     private Publisher publisher;
-    @ManyToOne
-    @JoinColumn(name = "categorie_id")
+    @DBRef
     private Category category;
     private String place;
     private Date createdDate = new Date();
@@ -43,11 +41,11 @@ public class Book {
     }
 
     // Getters and Setters
-    public Long getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 

@@ -33,7 +33,7 @@ public class CategoryService {
         return categories;
     }
 
-    public CategoryDTO getCategorieById(Long id) {
+    public CategoryDTO getCategorieById(String id) {
         return convertCategoryToDTO(categoryRepository.findById(id).orElse(new Category()));
     }
 
@@ -42,7 +42,7 @@ public class CategoryService {
         categoryRepository.save(category);
         return convertCategoryToDTO(category);
     }
-    public void deleteCategorieById(Long id) {
+    public void deleteCategorieById(String id) {
         categoryRepository.deleteById(id);
     }
 }

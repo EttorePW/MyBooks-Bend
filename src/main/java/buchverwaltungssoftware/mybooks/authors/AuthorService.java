@@ -34,8 +34,8 @@ public class AuthorService {
         return authorDTOList;
     }
 
-    public AuthorDTO getAuthorById(Long id) {
-        return convertAuthorToAuthorDTO(authorRepository.getReferenceById(id));
+    public AuthorDTO getAuthorById(String id) {
+        return convertAuthorToAuthorDTO(authorRepository.findById(id).orElse(null));
     }
 
     public AuthorDTO updateAuthor(NewAuthorDTO newAuthorDTO) {
@@ -43,7 +43,7 @@ public class AuthorService {
         authorRepository.save(newAuthor);
         return convertAuthorToAuthorDTO(newAuthor);
     }
-    public void deleteAuthor(Long id) {
+    public void deleteAuthor(String id) {
         authorRepository.deleteById(id);
     }
 }

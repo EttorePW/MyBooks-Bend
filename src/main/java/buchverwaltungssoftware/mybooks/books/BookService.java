@@ -8,7 +8,6 @@ import buchverwaltungssoftware.mybooks.categories.Category;
 import buchverwaltungssoftware.mybooks.categories.CategoryRepository;
 import buchverwaltungssoftware.mybooks.publishers.Publisher;
 import buchverwaltungssoftware.mybooks.publishers.PublisherRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,18 +40,18 @@ public class BookService {
         return  new NewBookDTO(book.getTitle(), book.getDescription(), book.isHasFinished(),book.getAuthor().getAuthorFirstName() +" "+ book.getAuthor().getAuthorLastName(), book.getPublisher().getName(), book.getCategory().getCategoryName(), book.getPlace());
 
     }
-    public BookDTO updateBook(Long id,NewBookDTO newBookDTO){
+    public BookDTO updateBook(String id,NewBookDTO newBookDTO){
         bookRepository.findById(id)
                 .map(book -> {
                     book.setHasFinished(newBookDTO.isHasFinished());
                     return book;
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Book with ID " + id + " not found"));
+                .orElseThrow(() -> new RuntimeException("Book with ID " + id + " not found"));
         return null;
     }
-    public BookDTO getBookById(Long id) {
+    public BookDTO getBookById(String id) {
 
-        return convertBookToBookDTO(bookRepository.getReferenceById(id));
+        return convertBookToBookDTO(bookRepository.findById(id).orElse(null));
 
     }
     public Author getBookByAuthorName(NewBookDTO newBookDTO) {
@@ -84,7 +83,7 @@ public class BookService {
         return newBookDTOList;
 
     }
-    public void deleteBookById(Long id) {
+    public void deleteBookById(String id) {
 
         bookRepository.deleteById(id);
     }

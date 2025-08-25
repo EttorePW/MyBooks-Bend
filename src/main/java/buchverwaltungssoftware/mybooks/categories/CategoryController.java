@@ -19,7 +19,7 @@ public class CategoryController {
         return categoryService.getAll();
     }
     @GetMapping("/{id}")
-    public CategoryDTO getCategoryById(@PathVariable Long id) {
+    public CategoryDTO getCategoryById(@PathVariable String id) {
         return categoryService.getCategorieById(id);
     }
     @PostMapping
@@ -31,7 +31,7 @@ public class CategoryController {
         return categoryService.updateCategorie(newCategoryDTO);
     }
     @DeleteMapping("/{id}")
-    public void deleteCategoryById(@PathVariable Long id) {
+    public void deleteCategoryById(@PathVariable String id) {
         categoryService.deleteCategorieById(id);
     }
 

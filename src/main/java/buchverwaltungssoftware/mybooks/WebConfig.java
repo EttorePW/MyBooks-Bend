@@ -13,7 +13,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // o /** para todo
-                        .allowedOrigins("https://mybookssoft.netlify.app") // tu frontend
+                        .allowedOrigins("https://mybookssoft.netlify.app", "http://localhost:3000", "http://localhost:5173") // frontend en producción y desarrollo
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
                         .allowCredentials(true);
